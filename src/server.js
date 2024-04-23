@@ -1,7 +1,8 @@
-const express = require('express')
-const cors = require('cors')
+import express from "express"
+import cors from "cors"
+import { routes } from "./routes.js"
 
-const routes = require('./routes')
+
 const app = express()
 
 app.use(express.json())
@@ -11,6 +12,10 @@ app.use(routes)
 
 app.get('/', (req, res) => {
     res.send('connected')
+})
+
+app.get('/estoque', (req, res) => {
+    res.send("")
 })
 
 

@@ -1,8 +1,10 @@
-const express = require('express')
-const bcrypt = require('bcrypt')
+import express from "express"
+import bcrypt from "bcrypt"
+import { db } from "./database/bd.js"
+import { getProduct } from "./database/product.js"
 
-const routes = express.Router()
-const db = require('./database/bd')
+export const routes = express.Router()
+
 
 
 /* Faz uma requizição POST na rota /register, consultando no banco de dados o email passado no body, e verifica se o email já foi cadastrado no banco
@@ -72,13 +74,14 @@ routes.post('/login', (req, res) => {
             }
 
             if (isMatch) {
-                return res.status(200).json({message: "Login bem-sucedido"})
-            } else {
+                //return res.status(200).json({message: "Login bem-sucedido"})
+                return res.redirect('/estoque')
+            } 
+            else {
                 return res.status(400).json({error: "Credenciais inválidas"})
             }
         })
     })
 })
 
-
-module.exports = routes
+routes.get('/estoque', getProduct)
