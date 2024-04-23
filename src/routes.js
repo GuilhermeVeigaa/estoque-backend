@@ -1,7 +1,7 @@
 import express from "express"
 import bcrypt from "bcrypt"
 import { db } from "./database/bd.js"
-import { getProduct } from "./database/product.js"
+import { getProduct, addProduct, updateProduct, deleteProduct } from "./database/product.js"
 
 export const routes = express.Router()
 
@@ -85,3 +85,9 @@ routes.post('/login', (req, res) => {
 })
 
 routes.get('/estoque', getProduct)
+
+routes.post("/estoque", addProduct)
+
+routes.put("/estoque:id", updateProduct)
+
+routes.delete("/estoque:id", deleteProduct)
